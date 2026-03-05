@@ -30,7 +30,7 @@ def run_molprobity(dataset_dir):
     ...
 
 def main(path):
-    dataset_dirs = [dataset_dir for system_dir in pathlib.Path(path).glob('*') for dataset_dir in (system_dir / 'processed_datasets').glob('*') if system_dir.is_dir() & dataset_dir.is_dir() & (dataset_dir / f'{dtag}-pandda-input.pdb').exists()]
+    dataset_dirs = [dataset_dir for system_dir in pathlib.Path(path).glob('*') for dataset_dir in (system_dir / 'processed_datasets').glob('*') if system_dir.is_dir() & dataset_dir.is_dir() & (dataset_dir / f'{dataset_dir.name}-pandda-input.pdb').exists()]
     print(f'Got {len(dataset_dirs)}')
     exit()
 
