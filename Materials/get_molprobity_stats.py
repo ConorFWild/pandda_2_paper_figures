@@ -34,7 +34,7 @@ def main(path):
     for system_dir in pathlib.Path(path).glob('*'):
         if not system_dir.is_dir():
             continue
-        print(system_dir)
+        print(system_dir.name)
         for dataset_dir in (system_dir / 'processed_datasets').glob('*'):
             if not dataset_dir.is_dir():
                 continue
