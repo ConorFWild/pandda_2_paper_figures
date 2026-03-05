@@ -41,6 +41,7 @@ def main(path):
             if  (dataset_dir / f'{dataset_dir.name}-pandda-input.pdb').exists():
                 dataset_dirs.append(dataset_dir)
     print(f'Got {len(dataset_dirs)}')
+    run_molprobity(dataset_dir[0])
     exit()
 
     joblib.Parallel(n_jobs=-1, verbose=50)(
