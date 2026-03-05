@@ -140,3 +140,4 @@ data
 env
 data/
 env/
+.DS_Store
