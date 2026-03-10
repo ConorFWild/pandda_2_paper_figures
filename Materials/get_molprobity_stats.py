@@ -42,7 +42,7 @@ def main(path):
                 dataset_dirs.append(dataset_dir)
     print(f'Got {len(dataset_dirs)}')
     run_molprobity(dataset_dirs[0])
-    exit()
+    # exit()
 
     joblib.Parallel(n_jobs=-1, verbose=50)(
         joblib.delayed(
