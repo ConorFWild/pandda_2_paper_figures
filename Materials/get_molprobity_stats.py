@@ -12,6 +12,10 @@ def run_molprobity(dataset_dir):
     dtag = dataset_dir.name
     st_path = dataset_dir / f'{dtag}-pandda-input.pdb'
     mtz_path = dataset_dir / f'{dtag}-pandda-input.mtz'
+
+    if (dataset_dir / 'molprobity.out').exists():
+        print(f'Already have molprobity results at {dataset_dir}!')
+        return
     script = SCRIPT.format(
         dataset_dir=dataset_dir,
         pdb_path=st_path,
@@ -42,7 +46,6 @@ def main(path):
                 dataset_dirs.append(dataset_dir)
     print(f'Got {len(dataset_dirs)}')
     run_molprobity(dataset_dirs[0])
-    # exit()
 
     joblib.Parallel(n_jobs=-1, verbose=50)(
         joblib.delayed(
