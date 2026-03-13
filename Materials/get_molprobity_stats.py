@@ -56,6 +56,8 @@ def main(path):
             for dataset_dir
             in dataset_dirs
         )
+
+    print(f'Finished!')
     
     ...
 
