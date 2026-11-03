@@ -9,6 +9,27 @@ from rich import print as rprint
 
 F_LABELS = ['F']
 SIG_LABELS = ['SIGF']
+RESIDUE_NAMES = ["ALA",
+                 "ARG",
+                 "ASN",
+                 "ASP",
+                 "CYS",
+                 "GLN",
+                 "GLU",
+                 "HIS",
+                 "ILE",
+                 "LEU",
+                 "LYS",
+                 "MET",
+                 "PHE",
+                 "PRO",
+                 "SER",
+                 "THR",
+                 "TRP",
+                 "TYR",
+                 "VAL",
+                 "GLY",
+                 ]
 
 def get_i_over_sigma(mtz_path):
     mtz = gemmi.read_mtz_file(str(mtz_path))
@@ -48,10 +69,11 @@ def get_num_asu_res(path):
     pdb = gemmi.read_structure(str(path))
     pdb.setup_entities()
     num_res = 0
-    for entity in pdb.entities: 
-        num_res += len(entity.full_sequence)
-        print(entity.full_sequence)
-        print(len(entity.full_sequence))
+    for model in pdb:
+        for chain in model:
+            for res in chain:
+                if res.name in RESIDUE_NAMES:
+                    num_waters +=1
     return num_res
 
 def get_num_waters(path):
@@ -96,9 +118,9 @@ def main(path, out_path):
             record = {
                 'System': system_dir.name,
                 'Dtag': dataset_dir.name,
-                'I/Sigma=2': i_sigma,
+                'I/Sigma=2': round(i_sigma, 2),
                 'ASU Residues': asu_res,
-                'ASU Volume': num_waters,
+                'ASU Volume': round(num_waters, 2),
                 'ASU Waters': asu_vol,
             }
             rprint(record)
