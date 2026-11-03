@@ -55,7 +55,7 @@ def get_i_over_sigma(mtz_path):
     means = gemmi.binmean(bins, fo/sigma)
     dmin = None
     for idx, mean in enumerate(means):
-        print(f'RES: {round(binner.dmin_of_bin(idx) ,2 )} I/SIGMA {round(mean, 2)}')
+        # print(f'RES: {round(binner.dmin_of_bin(idx) ,2 )} I/SIGMA {round(mean, 2)}')
         if mean < 2:
             dmin = binner.dmin_of_bin(idx-1)
             break
