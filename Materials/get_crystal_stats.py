@@ -117,11 +117,13 @@ def main(path, out_path):
             asu_res = get_num_asu_res(pdb_file)
             num_waters = get_num_waters(pdb_file)
             asu_vol = get_asu_vol(pdb_file)
+            res_high = round(gemmi.read_mtz_file(str(mtz_file)).resolution_high(), 2)
 
             record = {
                 'System': system_dir.name,
                 'Dtag': dataset_dir.name,
                 'I/Sigma=2': round(i_sigma, 2),
+                'Resolution High': res_high,
                 'ASU Residues': asu_res,
                 'ASU Volume': round(asu_vol, 2),
                 'ASU Waters': num_waters,
