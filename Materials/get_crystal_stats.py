@@ -73,7 +73,7 @@ def get_num_asu_res(path):
         for chain in model:
             for res in chain:
                 if res.name in RESIDUE_NAMES:
-                    num_waters +=1
+                    num_res +=1
     return num_res
 
 def get_num_waters(path):
