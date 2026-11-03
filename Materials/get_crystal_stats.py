@@ -42,7 +42,7 @@ def get_i_over_sigma(mtz_path):
         if fo_raw is not None:
             fo = fo_raw.array
     if fo is None:
-        raise Exception()
+        raise Exception(f'NO KNOWN F: {mtz_path}')
 
     sigma = None
     for sig_label in SIG_LABELS:
@@ -50,7 +50,7 @@ def get_i_over_sigma(mtz_path):
         if sig_raw is not None:
             sigma = sig_raw.array
     if sigma is None:
-        raise Exception()
+        raise Exception(f'NO KNOWN SIGMA: {mtz_path}')
 
     means = gemmi.binmean(bins, fo/sigma)
     dmin = None
