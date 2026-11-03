@@ -7,8 +7,8 @@ import gemmi
 import pandas as pd
 from rich import print as rprint
 
-F_LABELS = ['F']
-SIG_LABELS = ['SIGF']
+F_LABELS = ['F', 'F-obs', ]
+SIG_LABELS = ['SIGF', 'SIGF-obs']
 RESIDUE_NAMES = ["ALA",
                  "ARG",
                  "ASN",
