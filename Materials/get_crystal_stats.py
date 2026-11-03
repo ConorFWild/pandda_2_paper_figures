@@ -57,7 +57,10 @@ def get_i_over_sigma(mtz_path):
     for idx, mean in enumerate(means):
         # print(f'RES: {round(binner.dmin_of_bin(idx) ,2 )} I/SIGMA {round(mean, 2)}')
         if mean < 2:
-            dmin = binner.dmin_of_bin(idx-1)
+            if idx > 0:
+                dmin = binner.dmin_of_bin(idx-1)
+            else:
+                dmin = binner.dmin_of_bin(0)
             break
 
     if dmin is None:
