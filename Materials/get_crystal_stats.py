@@ -49,7 +49,7 @@ def get_asu_vol(path):
     return cell.volume
 
 def main(path, out_path):
-    dataset_dirs = []
+    records = []
     for system_dir in pathlib.Path(path).glob('*'):
         if not system_dir.is_dir():
             continue
@@ -57,7 +57,6 @@ def main(path, out_path):
         for dataset_dir in (system_dir / 'processed_datasets').glob('*'):
             if not dataset_dir.is_dir():
                 continue
-
             if not (dataset_dir / f'{dataset_dir.name}-pandda-input.pdb').exists():
                 continue
             if not (dataset_dir / f'{dataset_dir.name}-pandda-input.mtz').exists():
@@ -78,7 +77,7 @@ def main(path, out_path):
                 'ASU Waters': asu_vol,
             }
             rprint(record)
-        break
+            records.append(record)
 
     print(f'Finished!')
 
