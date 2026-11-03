@@ -120,8 +120,8 @@ def main(path, out_path):
                 'Dtag': dataset_dir.name,
                 'I/Sigma=2': round(i_sigma, 2),
                 'ASU Residues': asu_res,
-                'ASU Volume': round(num_waters, 2),
-                'ASU Waters': asu_vol,
+                'ASU Volume': round(asu_vol, 2),
+                'ASU Waters': num_waters,
             }
             rprint(record)
             records.append(record)
