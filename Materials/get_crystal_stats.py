@@ -49,7 +49,7 @@ def get_num_asu_res(path):
     pdb.setup_entities()
     num_res = 0
     for entity in pdb.entities: 
-        num_res += entity.full_sequence
+        num_res += len(entity.full_sequence)
         print(entity.full_sequence)
         print(len(entity.full_sequence))
     return num_res
