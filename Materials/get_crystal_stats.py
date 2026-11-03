@@ -40,7 +40,7 @@ def get_i_over_sigma(mtz_path):
             break
 
     if dmin is None:
-        dmin = binner.limits[-1]
+        dmin = binner.dmin_of_bin(idx)
 
     return dmin
 
