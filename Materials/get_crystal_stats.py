@@ -7,14 +7,29 @@ import gemmi
 import pandas as pd
 from rich import print as rprint
 
+F_LABELS = ['F']
+SIG_LABELS = ['SIGF']
 
 def get_i_over_sigma(mtz_path):
     mtz = gemmi.read_mtz_file(str(mtz_path))
     binner = gemmi.Binner()
     binner.setup(60, gemmi.Binner.Method.Dstar3, mtz)
     bins = binner.get_bins(mtz)
-    fo = mtz.column_with_label('FP').array
-    sigma = mtz.column_with_label('SIGFP').array
+    fo = None
+    for f_label in F_LABELS:
+        fo_raw = mtz.column_with_label(f_label)
+        if fo_raw is not None:
+            fo = fo_raw.array
+    if fo is None:
+        raise Exception()
+
+    sigma = None
+    for sig_label in SIG_LABELS:
+        sig_raw = mtz.column_with_label(sig_label)
+        if sig_raw is not None:
+            sigma = sig_raw.array
+    if sigma is None:
+        raise Exception()
 
     means = gemmi.binmean(bins, fo/sigma)
     for idx, mean in enumerate(means):
@@ -53,7 +68,7 @@ def main(path, out_path):
     for system_dir in pathlib.Path(path).glob('*'):
         if not system_dir.is_dir():
             continue
-        print(system_dir.name)
+        print(f'##### {system_dir.name} #####')
         for dataset_dir in (system_dir / 'processed_datasets').glob('*'):
             if not dataset_dir.is_dir():
                 rprint(f'\tNOT A DIR: {dataset_dir}')
