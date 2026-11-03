@@ -134,7 +134,7 @@ def main(path, out_path):
     print(f'Finished!')
 
 
-    df = pd.DataFrame(record)
+    df = pd.DataFrame(records)
     df.write_csv(out_path)
     ...
 
