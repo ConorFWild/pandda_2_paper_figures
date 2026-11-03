@@ -56,13 +56,17 @@ def main(path, out_path):
         print(system_dir.name)
         for dataset_dir in (system_dir / 'processed_datasets').glob('*'):
             if not dataset_dir.is_dir():
-                continue
-            if not (dataset_dir / f'{dataset_dir.name}-pandda-input.pdb').exists():
-                continue
-            if not (dataset_dir / f'{dataset_dir.name}-pandda-input.mtz').exists():
+                rprint(f'\tNOT A DIR: {dataset_dir}')
                 continue
             pdb_file = dataset_dir / f'{dataset_dir.name}-pandda-input.pdb'
             mtz_file = dataset_dir / f'{dataset_dir.name}-pandda-input.mtz'
+            if not pdb_file.exists():
+                rprint(f"\tNO SUCH FILE: {pdb_file}")
+                continue
+            if not mtz_file.exists():
+                rprint(f"\tNO SUCH FILE: {mtz_file}")
+                continue
+
             i_sigma = get_i_over_sigma(mtz_file)
             asu_res = get_num_asu_res(pdb_file)
             num_waters = get_num_waters(pdb_file)
