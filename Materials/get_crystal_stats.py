@@ -36,6 +36,7 @@ def get_i_over_sigma(mtz_path):
         print(mean)
         if mean < 2:
             dmin = binner.dmin_of_bin(idx-1)
+            break
 
     return dmin
 
