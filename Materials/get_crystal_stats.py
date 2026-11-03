@@ -32,11 +32,15 @@ def get_i_over_sigma(mtz_path):
         raise Exception()
 
     means = gemmi.binmean(bins, fo/sigma)
+    dmin = None
     for idx, mean in enumerate(means):
-        print(mean)
+        print(f'{round(binner.dmin_of_bin(idx) ,2 )} {round(mean, 2)}')
         if mean < 2:
             dmin = binner.dmin_of_bin(idx-1)
             break
+
+    if dmin is None:
+        dmin = binner.limits[-1]
 
     return dmin
 
