@@ -135,7 +135,7 @@ def main(path, out_path):
 
 
     df = pd.DataFrame(records)
-    df.write_csv(out_path)
+    df.to_csv(out_path)
     ...
 
 if __name__ == "__main__":
